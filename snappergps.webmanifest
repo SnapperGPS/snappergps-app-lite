@@ -26,18 +26,6 @@
     "background_color": "#B390CF",
     "categories": ["navigation", "education"],
     "orientation": "any",
-    "shortcuts": [
-        {
-            "name": "Configure",
-            "url": "/snappergps-app-lite/configure.html",
-            "description": "Configure your SnapperGPS receiver for your next deployment"
-        },
-        {
-            "name": "Upload",
-            "url": "/snappergps-app-lite/upload.html",
-            "description": "Upload the data from your SnapperGPS receiver after a completed deployment"
-        }
-    ],
     "screenshots": [
         {
             "src": "images/Screenshot_2021-06-26_232450.png",
