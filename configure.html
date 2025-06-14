@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>SnapperGPS - Configure</title>
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/style.css" />
+        <script src="js/deviceCommunication.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Configure your SnapperGPS receiver for your next deployment.">
+    </head>
+    <body>
+
+        <!-- Nav bar -->
+        <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <span class="full-text">SnapperGPS</span>
+                    <span class="short-text">S</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a 
+                                    class="nav-link active" aria-current="page"
+                                href="configure.html">Configure
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a 
+                                    class="nav-link"
+                                href="upload.html">Upload
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+
+        <!-- Main body -->
+        <main class="container">
+
+            <div class="row">
+                <div class="col">
+                    <h1>Configure your SnapperGPS receiver for your next deployment</h1>
+                </div>
+            </div>
+
+            <div class="row" style="margin-bottom: 20px;">
+                <div class="col">
+                    <i>
+                        Did you know that this site works offline, too?
+                        You can configure your SnapperGPS receiver in the field.
+                        (If you do not clear your browser cache.)
+                    </i>
+                </div>
+            </div>
+
+            <div class="row bg-white">
+
+                <div>
+                    <div id="warning-display" style="display: none;">
+                        <div class="card text-white bg-warning mb-3" style="max-width: 100%;height: 150%">
+                            <div class="card-header"><b>Warning</b></div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Your browser does not support the WebUSB
+                                    technology, which is necessary to configure a SnapperGPS
+                                    receiver for a deployment or to upload data from a receiver
+                                    to the server for processing. However, you can still view
+                                    data that has already been processed. For full functionality,
+                                    please switch to a Chromium-based
+                                    browser such as Edge or Chrome.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        // Check for HTTPS protocol
+                        if (window.location.protocol !== 'https:' && window.location.hostname !== "localhost") {
+                    
+                            // If not HTTPS, switch to it
+                            // window.location.replace(`https:${window.location.href.substring(window.location.protocol.length)}`);
+                    
+                        } else {
+                    
+                            // Check if WebUSB is still not available
+                            if (!navigator.usb) {
+                    
+                                document.getElementById('warning-display').style.display = '';
+                    
+                            }
+                    
+                        }
+                    </script>
+                </div>
+
+                <div id="error-display" style="display: none;">
+                    <div class="card text-white bg-danger mb-3" style="max-width: 100%;">
+                        <div class="card-header"><b>Error</b></div>
+                        <div class="card-body">
+                            <p class="card-text" id="error-text">Error</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row bg-light">
+
+                <div class="row">
+                    <div class="col">
+                        Connect your SnapperGPS receiver
+                        via USB.
+                        If you used SnapperGPS before, then you can see some information
+                        from your SnapperGPS receiver below.
+                        Otherwise, click <i>Pair receiver</i> and select your SnapperGPS
+                        receiver from the list.
+                    </div>
+                </div>
+
+                <div class="row-ident">
+                    <div class="card text-dark bg-light-card mb-3" style="width: 100%;">
+                        <div class="card-header">
+                          Receiver ID: <span id="device-id-span">-</span>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Time: <span id="time-span">-</span></li>
+                          <li class="list-group-item">Battery voltage: <span id="battery-voltage-span">-</span></li>
+                          <li class="list-group-item">Firmware: <span id="firmware-description-span">-</span></li>
+                          <li class="list-group-item">Firmware version: <span id="firmware-version-span">-</span></li>
+                          <li id="snapshot-count-li" class="list-group-item">Snapshot count: <span id="snapshot-count-span">-</span></li>
+                          <li id="status-li" class="list-group-item">Status: <span id="status-span">-</span></li>
+                        </ul>
+                      </div>
+                      
+                      <script src="strftime-min.js"></script>
+                      <script src="js/deviceInfo.js"></script>
+                </div>
+
+                <div class="row btnrow row-ident">
+                    <div class="col btncol">
+                        <button class="btn btn-primary full-width" id="pair-button" style="min-width: 175px" disabled>Pair receiver</button>
+                    </div>
+                </div>
+            
+            </div>
+
+            <div class="row bg-light">
+
+                <div class="row">
+                    <div class="col">
+                        If the firmware of your SnapperGPS receiver is not up to
+                        date, then consider updating it at this stage.
+                    </div>
+                </div>
+
+                <div class="row btnrow row-ident">
+                    <div class="col btncol">
+                        <button class="btn btn-primary full-width" id="firmware-button" style="min-width: 175px" disabled>Update firmware</button>
+                        <!-- <label id="firmware-info" for="firmware-button" style="margin-left: 10px;">No firmware found.</label> -->
+                    </div>
+                </div>
+                <div class="row row-ident">
+                    <div class="col">
+                        <span id="firmware-info">
+                            No firmware for update selected. 
+                        </span>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none; margin-left: 5px" id="firmware-spinner"></span>       
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row bg-light">
+
+                <div class="row">
+                    <div class="col" id="interval-input-text">
+                        To start a new deployment, enter the desired
+                        time interval between two consecutive
+                        recordings in seconds or minutes.
+                    </div>
+                </div>
+
+                <div class="row row-ident">
+                    <div class="col">
+                        <label for="interval-input" style="margin-right: 10px;" id="interval-input-label">Interval:</label>
+                        <input id="interval-input" type="number" value="1"  min="0"
+                            step="1"
+                            style="width: 70px; text-align: right;">
+                        <select id="interval-unit-input" style="height: 30px;">
+                            <option value="seconds">seconds</option>
+                            <option value="minutes">minutes</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        Choose if you want to start your data collection
+                        at a certain point in time in the future or want to end it early.
+                        Otherwise, your SnapperGPS receiver will begin collecting
+                        data immediately and will run as long as its battery and memory last.
+                        Ensure that you record the first couple of snapshots
+                        outdoors with good sky visibility since SnapperGPS uses
+                        them to calibrate your receiver.
+                        <!-- Starting at a point where your receiver is
+                        already outside helps to speed up post-processing. -->
+                    </div>
+                </div>
+
+                <div class="row row-ident">
+                    <div class="col">
+                        <label for="limit-start-checkbox" style="margin-right: 10px;">Only collect snapshots after given date/time:</label>
+                        <input type="checkbox" id="limit-start-checkbox" checked>
+                    </div>
+                </div>
+
+                <div class="row row-ident-2">
+                    <div class="col">
+                        <label id="limit-start-label" for="limit-start-date-input" style="margin-right: 10px;">Start:</label>
+                        <input type="date" id="limit-start-date-input">
+                        <input type="time" id="limit-start-time-input">
+                        <label id="limit-start-timezone" for="limit-start-time-input"></label>
+                    </div>
+                </div>
+
+                <div class="row row-ident">
+                    <div class="col">
+                        <label for="limit-end-checkbox" style="margin-right: 10px;">Only collect snapshots until given date/time:</label>
+                        <input type="checkbox" id="limit-end-checkbox" value="0" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="row row-ident-2">
+                    <div class="col">
+                        <label id="limit-end-label" for="limit-end-date-input" style="margin-right: 10px; color: lightgray;">End:</label>
+                        <input type="date" id="limit-end-date-input" disabled>
+                        <input type="time" id="limit-end-time-input" disabled value="00:00">
+                        <label id="limit-end-timezone" for="limit-end-time-input" style="color: lightgray;"></label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row bg-white">
+
+                <div id="battery-warning-display" style="display: none;">
+                    <div class="card text-white bg-warning mb-3">
+                        <div class="card-header"><b>Warning</b></div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                The supply voltage of your receiver is low.
+                                Is it connected to a charged battery?
+                                If you configure a receiver that is not connected to a charged battery,
+                                then your configuration will not be saved when you
+                                unplug your receiver.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="charge-warning-display" style="display: none;">
+                    <div class="card text-white bg-warning mb-3">
+                        <div class="card-header"><b>Warning</b></div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                Your battery does not seem to be fully charged.
+                                For a long deployment, we recommend charging your LiPo battery to around 4.1 V or to use two LR44 or SR44 batteries with around 3.0 V combined.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="duration-warning-display" style="display: none;">
+                    <div class="card text-white bg-warning mb-3">
+                        <div class="card-header"><b>Warning</b></div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                We recommend that you record a little bit of test data with your SnapperGPS receiver
+                                in a setting similar to your intended deployment scenario first
+                                before you record more data over a longer period of time.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row bg-light">
+
+                <div class="row">
+                    <div class="col">
+                        Configure your receiver now.
+                        Be aware that existing data will be erased.
+                    </div>
+                </div>
+
+                <div class="row btnrow row-ident">
+                    <div class="col btncol">
+                        <button class="btn btn-primary full-width" id="configure-button" style="min-width: 175px" disabled>Configure</button>
+                    </div>
+                </div>
+
+                <div class="row row-ident">
+                    <div class="col">
+                        <span id="status-info">
+                            No device connected.
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="row bg-light">
+
+                <div class="row">
+                    <div class="col">
+                        If you changed your mind, then you can revert your
+                        configuration and order your receiver to go into a deep
+                        sleep mode after unplugging instead.
+                    </div>
+                </div>
+
+                <div class="row btnrow row-ident">
+                    <div class="col btncol">
+                        <button class="btn btn-primary full-width" id="shutdown-button" style="min-width: 175px" disabled>Shutdown</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+
+    </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="js/configure/configureComms.js"></script>
+    <script src="service-worker.js"></script>
+    <script src="js/configure/configureUI.js"></script>
+
+</html>
