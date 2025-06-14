@@ -29,12 +29,12 @@
     "shortcuts": [
         {
             "name": "Configure",
-            "url": "/configure.html",
+            "url": "/snappergps-app-lite/configure.html",
             "description": "Configure your SnapperGPS receiver for your next deployment"
         },
         {
             "name": "Upload",
-            "url": "/upload.html",
+            "url": "/snappergps-app-lite/upload.html",
             "description": "Upload the data from your SnapperGPS receiver after a completed deployment"
         }
     ],
