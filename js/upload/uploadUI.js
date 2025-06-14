@@ -180,13 +180,6 @@ function checkForDevice(repeat = true) {
             // Upload/transfer button disabled if no device present
             if (+snapshotCountSpan.innerHTML > 0) {
 
-                if (!uploading && latInputs[0].value !== '' && lngInputs[0].value !== '') {
-                    // Can only upload if start point is provided
-
-                    uploadDeviceButton.disabled = false;
-
-                }
-
                 transferButton.disabled = false;
 
             }
@@ -200,8 +193,6 @@ function checkForDevice(repeat = true) {
         resetDeviceInfo();
 
         if (!transferring) {
-
-            uploadDeviceButton.disabled = true;
 
             transferButton.disabled = true;
 
@@ -265,7 +256,6 @@ pairButton.addEventListener('click', () => {
 setDisconnectFunction(() => {
 
     resetDeviceInfo();
-    uploadDeviceButton.disabled = true;
     transferButton.disabled = true;
 
 });
@@ -577,7 +567,6 @@ if (!navigator.usb) {
 
     pairButton.disabled = true;
     transferButton.disabled = true;
-    uploadDeviceButton.disabled = true;
 
 } else {
 
