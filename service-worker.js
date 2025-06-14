@@ -20,7 +20,7 @@ async function updateCache() {
             '/snappergps-app-lite/accelerometer.html',
             '/snappergps-app-lite/images/favicon.ico',
             '/snappergps-app-lite/css/style.css',
-            '/snappergps-app-lite/css/upload.css',
+            // '/snappergps-app-lite/css/upload.css',
             '/snappergps-app-lite/js/configure/configureComms.js',
             '/snappergps-app-lite/js/configure/configureUI.js',
             '/snappergps-app-lite/js/upload/uploadComms.js',
