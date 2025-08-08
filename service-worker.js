@@ -18,6 +18,7 @@ async function updateCache() {
             '/snappergps-app-lite/upload.html',
             '/snappergps-app-lite/flash.html',
             '/snappergps-app-lite/accelerometer.html',
+            '/snappergps-app-lite/pressure-sensor.html',
             '/snappergps-app-lite/images/favicon.ico',
             '/snappergps-app-lite/css/style.css',
             // '/snappergps-app-lite/css/upload.css',
@@ -27,6 +28,7 @@ async function updateCache() {
             '/snappergps-app-lite/js/upload/uploadUI.js',
             '/snappergps-app-lite/js/configure/flashUI.js',
             '/snappergps-app-lite/js/accelerometer/accelerometerUI.js',
+            '/snappergps-app-lite/js/pressure-sensor/pressureSensorUI.js',
             '/snappergps-app-lite/js/deviceCommunication.js',
             '/snappergps-app-lite/js/deviceInfo.js',
             '/snappergps-app-lite/service-worker.js',
@@ -36,6 +38,7 @@ async function updateCache() {
             '/snappergps-app-lite/firmware/SnapperGPS-Basic.bin',
             '/snappergps-app-lite/firmware/SnapperGPS-Capacitance-Triggered.bin',
             '/snappergps-app-lite/firmware/SnapperGPS-Accelerometer.bin',
+            '/snappergps-app-lite/firmware/SnapperGPS-Pressure-Sensor.bin',
         ]);
         // TODO: Handle fail of addAll operation
     })
