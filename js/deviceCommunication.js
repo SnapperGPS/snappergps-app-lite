@@ -25,6 +25,7 @@ const firmwareDictionary = {
     'SnapperGPS-Capacitance-Logger': '0.0.2',
     'SnapperGPS-Accelerometer': '0.0.2',
     'SnapperGPS-Freshwater': '0.0.1',
+    'SnapperGPS-Pressure-Sensor': '0.0.0',
 };
 
 // USB device
